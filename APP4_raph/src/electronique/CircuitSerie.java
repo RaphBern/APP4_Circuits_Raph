@@ -13,12 +13,14 @@ public class CircuitSerie extends Circuit{
 
     @Override
     public double calculerResistance() {
-        double resistance = 0;
+        double resistanceTotale = 0;
        for (int i = 0; i < composants.size(); i++) {
-
+           if (composants.get(i) instanceof Resistance) {
+               return resistanceTotale += ((Resistance) composants.get(i)).getValeurR();
+           }
        }
 
 
-        return resistance;
+        return resistanceTotale;
     }
 }
