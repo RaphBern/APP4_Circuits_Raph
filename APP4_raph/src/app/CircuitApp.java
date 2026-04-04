@@ -3,6 +3,7 @@ package app;
 import electronique.Composant;
 
 import java.io.FileReader;
+import java.io.FilterOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,9 +14,13 @@ public class CircuitApp {
 //       System.out.println(c.calculerResistance());
 
        Scanner s = new Scanner(System.in);
-       if (s.nextLine().equals("R")) {
+
+
+
+       String command = s.nextLine();
+       if (command.equals("R")) {
           new CircuitApp();
-       } else if (s.nextLine().equals("Q")) {
+       } else if (command.equals("Q")) {
            System.out.println("Au revoir");
            s.close();
        }
