@@ -34,17 +34,20 @@ public class CircuitBuiler {
         } else throw new IllegalArgumentException("type de composant invalide");
     }
 
-    private static char fSep = File.separatorChar;
-    public static final String PathIn = System.getProperty("user.dir") + fSep + "APP4_raph" + fSep + "src" + fSep + "donnees" + fSep + "fichiers_json";
-
     public Composant construireCircuit(String pathIn) {
+        Composant c = null;
         ObjectMapper mapper = new ObjectMapper();
+
         try {
-            JsonNode donnees = mapper.readTree((pathIn));
-            return lireComposant(donnees);
+            FileReader reader = new FileReader(pathIn);
+            JsonNode donnees = mapper.readTree((reader));
+            for (JsonNode noeud : donnees) {
+                c = lireComposant(noeud);
+            }
 
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }
+        return c;
     }
 }
