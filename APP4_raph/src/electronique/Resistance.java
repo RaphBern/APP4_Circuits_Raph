@@ -17,7 +17,7 @@ public class Resistance extends Composant{
         }
         this.valeurR = valeurR;
     }
-
+@Override
     public double calculerResistance() {
         return getValeurR();
     }
