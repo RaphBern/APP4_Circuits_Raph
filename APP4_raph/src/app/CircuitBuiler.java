@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import electronique.*;
 
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class CircuitBuiler {
@@ -39,8 +36,12 @@ public class CircuitBuiler {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            FileReader reader = new FileReader(pathIn);
-            JsonNode donnees = mapper.readTree((reader));
+            InputStream is =  CircuitBuiler.class.getClassLoader().getResourceAsStream(pathIn);
+            if (is == null) {
+                throw new RuntimeException("");
+            }
+//            FileReader reader = new FileReader(pathIn);
+            JsonNode donnees = mapper.readTree((is));
             for (JsonNode noeud : donnees) {
                 c = lireComposant(noeud);
             }
